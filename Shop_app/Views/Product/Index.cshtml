@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Shop_app.Models.Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Read Products";
+}
+<h2>Products</h2>
+<p>
+    <!--GET METHOD-->
+    <a 
+    asp-controller ="Product"
+    asp-action="Create" 
+    class="btn btn-primary"
+    >Create</a>
+</p>
+<!--Створити таблицю для відображення Продуктів-->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>
+                    @if(
+                      product.ImageFile != null && 
+                      product.ImageType != null
+                  )
+                    {
+                        var base64 = Convert.ToBase64String(product.ImageFile);
+                        var imgSrc = $"data:{product.ImageType};base64,{base64}";
+                        <img src="@imgSrc" width="200" height="100"/>
+                    }
+                </td>
+                <td>
+                    <!--http://localhost:port/product/update/5-->
+                    <a 
+                        href="@Url.Action("Update", new { id = product.Id })"
+                       class="btn btn-warning"
+                    >Update</a>
+                    <a href="@Url.Action("Details", new { id = product.Id })" 
+                    class="btn btn-success">Details</a>
+                    <a href="@Url.Action("Delete", new { id = product.Id })" 
+                    class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

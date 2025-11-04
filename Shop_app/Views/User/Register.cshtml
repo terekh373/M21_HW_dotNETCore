@@ -1,0 +1,25 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Microsoft.AspNetCore.Identity.IdentityUser
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register Page</h2>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+<form
+    class="border p-3"
+    asp-controller="User" 
+    asp-action="Register" 
+    method="post">
+    <label asp-for="Email" class="form-label">Email:</label>
+    <input type="email" class="form-control" name="Email" required/>
+    <label asp-for="PasswordHash" class="form-label">Password:</label>
+    <input type="password" class="form-control" name="Password" required />
+    <button type="submit" class="btn btn-success m-3">Register</button>
+</form>
+</div>
+    <div class="col-4"></div>
+</div>

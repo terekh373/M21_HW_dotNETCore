@@ -1,0 +1,39 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Shop_app.Models.Product
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Update Product";
+}
+<h2>Update Product</h2>
+
+<form enctype="multipart/form-data" asp-controller="Product" asp-action="Update" method="post">
+    <div class="form-group">
+        <label asp-for="Id">Id</label>
+        @if(Model != null)
+        {
+            <input name="Id" class="form-control" value="@Model.Id" />
+        }
+        else
+        {
+            <input name="Id" class="form-control" />
+        }
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input name="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input name="Price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea name="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageData">Product photo:</label>
+        <input type="file" name="ImageData" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

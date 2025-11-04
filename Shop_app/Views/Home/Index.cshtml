@@ -1,0 +1,36 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Home Page";
+}
+<h1>Home Page</h1>
+<!--
+asp-controller -> Redirect to ProductController
+asp-action -> In ProductController start method Index
+-->
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        <h1>Hello, @User.Identity.Name</h1>
+
+        <a class="btn btn-dark" href="/user/Logout">Logout</a>
+        <a class="btn btn-dark" href="/user/AssignRole">AssignRole</a>
+        <a class="btn btn-dark" href="/user/CreateRole">CreateRole</a>
+
+    }
+    else
+    {
+        <h1>Login please!</h1>
+    }
+}
+<a class="btn btn-dark" 
+    asp-controller="Product" 
+    asp-action="Index"
+>Read Products</a>
+<a class="btn btn-warning"
+   asp-controller="User"
+   asp-action="Register">Register</a>
+<a class="btn btn-success"
+   asp-controller="User"
+   asp-action="Login">Login</a>
